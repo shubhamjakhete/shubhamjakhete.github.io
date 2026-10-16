@@ -6,237 +6,622 @@
 <title>Shubham Jakhete</title>
 <meta name="description" content="Shubham Jakhete: Human-Centered AI and accessibility research on AI systems that interpret digital interfaces for blind and low-vision people.">
 <meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:wght@400;500&family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#fbfaf7;--surface:#ffffff;--text:#1d1c1a;--muted:#5a5853;--line:#e3e0d8;
-  --accent:#1f5f8b;--accent-soft:#e6eff5;--tag:#f1efe9;
-  --serif:"Iowan Old Style","Charter","Palatino Linotype",Georgia,serif;
-  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --ground:#e4e9f0;--panel:#e4e9f0;--ink:#1e2a3d;--quiet:#475467;--hair:#c9d0da;
+  --teal:#0a625d;--teal-wash:#cde2e0;--focus:#e0a400;--miss:#475467;--edge:#7a8597;
+  --hi:#ffffff;--lo:#b4bdca;--on-teal:#f4f7fa;--bad-bg:#f5d9d2;--bad:#8f2a16;
+  --sans:"Atkinson Hyperlegible Next",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Atkinson Hyperlegible Mono",ui-monospace,Menlo,Consolas,monospace;
 }
 @media (prefers-color-scheme:dark){
-  :root{--bg:#141413;--surface:#1c1c1a;--text:#ecebe6;--muted:#a9a69e;--line:#33322e;
-  --accent:#7cb8e0;--accent-soft:#1d2a33;--tag:#26251f;}
+  :root:not([data-theme="light"]){--ground:#262b33;--panel:#262b33;--ink:#e6eaef;--quiet:#a9b4c0;--hair:#363d48;
+  --teal:#5fd0c6;--teal-wash:#1e3c3e;--focus:#f2c230;--miss:#a9b4c0;--edge:#7b8794;
+  --hi:#30363f;--lo:#1a1d23;--on-teal:#11211f;--bad-bg:#4a2620;--bad:#ffb4a3;}
 }
+:root[data-theme="dark"]{--ground:#262b33;--panel:#262b33;--ink:#e6eaef;--quiet:#a9b4c0;--hair:#363d48;
+  --teal:#5fd0c6;--teal-wash:#1e3c3e;--focus:#f2c230;--miss:#a9b4c0;--edge:#7b8794;
+  --hi:#30363f;--lo:#1a1d23;--on-teal:#11211f;--bad-bg:#4a2620;--bad:#ffb4a3;}
+:root{--raise:7px 7px 14px var(--lo),-7px -7px 14px var(--hi);--raise-sm:4px 4px 8px var(--lo),-4px -4px 8px var(--hi);
+  --press:inset 4px 4px 8px var(--lo),inset -4px -4px 8px var(--hi);color-scheme:light}
+:root[data-theme="dark"]{color-scheme:dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark}}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{margin:0;background:var(--bg);color:var(--text);font:17px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
-a{color:var(--accent);text-underline-offset:3px;text-decoration-thickness:1px}
-a:hover{text-decoration-thickness:2px}
-:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:2px}
-.skip{position:absolute;left:-999px;top:0;background:var(--accent);color:var(--bg);padding:.6rem 1rem;z-index:10}
-.skip:focus{left:1rem;top:1rem}
-.wrap{max-width:46rem;margin:0 auto;padding:0 1.25rem}
-header.site{border-bottom:1px solid var(--line);position:sticky;top:0;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(6px);z-index:5}
-header.site .wrap{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding-top:.7rem;padding-bottom:.7rem;flex-wrap:wrap}
-.brand{font-family:var(--serif);font-weight:600;font-size:1.05rem;color:var(--text);text-decoration:none}
-nav ul{list-style:none;margin:0;padding:0;display:flex;gap:1.1rem;flex-wrap:wrap;font-size:.92rem}
-nav a{color:var(--muted);text-decoration:none}
-nav a:hover{color:var(--accent)}
-.hero{padding:4rem 0 2.5rem}
-h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.25}
-h1{font-size:clamp(2.1rem,6vw,2.8rem);margin:0 0 .4rem;letter-spacing:-.01em}
-.role{color:var(--muted);margin:0 0 1.6rem;font-size:1.02rem}
-.lede{font-size:1.12rem;margin:0 0 1.6rem}
-.links{display:flex;flex-wrap:wrap;gap:.6rem;list-style:none;padding:0;margin:0}
-.btn{display:inline-block;padding:.45rem .95rem;border:1px solid var(--line);border-radius:999px;text-decoration:none;font-size:.93rem;color:var(--text);background:var(--surface)}
-.btn:hover{border-color:var(--accent);color:var(--accent)}
-.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--bg)}
-.btn.primary:hover{color:var(--bg);filter:brightness(1.08)}
-section{padding:2.2rem 0;border-top:1px solid var(--line)}
-h2{font-size:1.45rem;margin:0 0 1.4rem}
-.interests{display:flex;flex-wrap:wrap;gap:.45rem;list-style:none;padding:0;margin:1rem 0 0}
-.interests li{background:var(--accent-soft);color:var(--text);padding:.2rem .7rem;border-radius:999px;font-size:.88rem}
-article.project{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:1.4rem 1.5rem;margin:0 0 1.2rem}
-article.project h3{margin:0;font-size:1.22rem}
-.meta{color:var(--muted);font-size:.9rem;margin:.25rem 0 .9rem}
-article.project p{margin:0 0 .8rem}
-article.project ul{margin:0 0 .9rem;padding-left:1.2rem}
-article.project li{margin:.25rem 0}
-.tags{display:flex;flex-wrap:wrap;gap:.4rem;list-style:none;padding:0;margin:.4rem 0 0}
-.tags li{font:.78rem var(--mono);background:var(--tag);padding:.15rem .5rem;border-radius:4px;color:var(--muted)}
-.repo{font-size:.9rem}
-ol.pubs{padding-left:1.3rem;margin:0}
-ol.pubs li{margin:0 0 .9rem}
-.pubs .title{font-weight:600}
-.job{margin:0 0 1.5rem}
-.job h3{font-size:1.08rem;margin:0}
-.job .meta{margin:.15rem 0 .5rem}
+body{margin:0;background:var(--ground);color:var(--ink);font:400 1.0625rem/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--teal);text-underline-offset:.2em;text-decoration-thickness:.08em}
+a:hover{text-decoration-thickness:.16em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:3px}
+.skip{position:absolute;left:-999px;top:.75rem;background:var(--ink);color:var(--ground);padding:.6rem 1rem;border-radius:4px;z-index:10}
+.skip:focus{left:.75rem}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{max-width:68rem;margin:0 auto;padding:0 1.25rem}
+
+/* top bar */
+.top{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:.75rem 1.5rem;padding:1.4rem 0}
+.top .name{font-weight:700;color:var(--ink);text-decoration:none;font-size:1.05rem}
+.top ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.4rem 1.4rem}
+.top ul a{color:var(--quiet);text-decoration:none}
+.top ul a:hover{color:var(--teal)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:3.5rem;align-items:center;padding:3.5rem 0 4.5rem}
+.hero h1{font-size:clamp(2.6rem,6.2vw,4.4rem);line-height:1.02;letter-spacing:-.025em;font-weight:700;margin:0 0 1.4rem}
+.hero .thesis{font-size:1.25rem;line-height:1.5;margin:0 0 1rem;max-width:34rem}
+.hero .status{color:var(--quiet);margin:0 0 2rem;max-width:34rem}
+.actions{display:flex;flex-wrap:wrap;gap:.7rem;list-style:none;margin:0;padding:0}
+.actions a{display:inline-block;padding:.55rem 1.05rem;border-radius:6px;text-decoration:none;font-weight:500;border:1.5px solid var(--ink);color:var(--ink)}
+.actions a:hover{background:var(--ink);color:var(--ground)}
+.actions a.main{background:var(--teal);border-color:var(--teal);color:var(--ground)}
+.actions a.main:hover{filter:brightness(1.1)}
+
+/* the demo: one orchestrated moment */
+.demo{background:var(--panel);border:1px solid var(--hair);border-radius:14px;padding:1.5rem 1.5rem 1.2rem;box-shadow:0 18px 40px -28px rgba(20,33,61,.45)}
+.demo-head{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:1.1rem}
+.demo-head h2{font-size:.98rem;font-weight:700;margin:0}
+.toggle{font:500 .85rem var(--sans);background:none;border:1.5px solid var(--hair);color:var(--quiet);border-radius:6px;padding:.3rem .7rem;cursor:pointer}
+.toggle:hover{border-color:var(--ink);color:var(--ink)}
+.bar{position:relative;display:flex;gap:.6rem;padding:.7rem;border-radius:10px;background:var(--ground);width:max-content;max-width:100%}
+.bar button{width:3rem;height:3rem;display:grid;place-items:center;border:0;border-radius:8px;background:var(--panel);color:var(--ink);cursor:pointer}
+.bar button svg{width:1.4rem;height:1.4rem}
+.bar button:focus-visible{outline:none}
+.ring{position:absolute;top:.7rem;left:.7rem;width:3rem;height:3rem;border-radius:9px;box-shadow:0 0 0 3px var(--focus),0 0 0 7px color-mix(in srgb,var(--focus) 30%,transparent);pointer-events:none;transition:transform .45s cubic-bezier(.3,.7,.2,1)}
+.speech{margin-top:1.3rem;display:grid;gap:.85rem}
+.line{display:grid;grid-template-columns:8.8rem 1fr;gap:.75rem;align-items:baseline}
+.line .who{color:var(--quiet);font-size:.85rem}
+.line q{quotes:none;font:500 1rem/1.45 var(--mono);min-height:2.9em}
+.line.before q{color:var(--miss);text-decoration:line-through;text-decoration-thickness:1px}
+.line.after q{color:var(--ink)}
+.line.after q .cat{background:var(--teal-wash);color:var(--teal);padding:0 .25em;border-radius:3px}
+.caret{display:inline-block;width:.55ch;height:1.05em;background:var(--teal);vertical-align:-.15em;margin-left:1px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.check{display:flex;gap:.5rem;align-items:center;font-size:.88rem;color:var(--teal);opacity:0;transition:opacity .3s}
+.check.on{opacity:1}
+.check svg{width:1rem;height:1rem;flex:none}
+.demo-note{margin:1.1rem 0 0;font-size:.82rem;color:var(--quiet)}
+
+/* sections */
+section{padding:3.2rem 0;border-top:1px solid var(--hair)}
+section > .wrap > h2,.sec-title{font-size:1.9rem;letter-spacing:-.015em;margin:0 0 2rem;font-weight:700}
+.work{display:grid;grid-template-columns:13rem minmax(0,1fr);gap:1rem 3rem;padding:0 0 2.6rem}
+.work + .work{padding-top:2.6rem;border-top:1px dashed var(--hair)}
+.work .side{color:var(--quiet);font-size:.92rem;line-height:1.5}
+.work .side strong{display:block;color:var(--ink);font-weight:500;font-size:1rem;margin-bottom:.15rem}
+.work h3{font-size:1.45rem;margin:0 0 .6rem;letter-spacing:-.01em}
+.work p{margin:0 0 .9rem;max-width:42rem}
+.headline-result{font-weight:500;border-left:3px solid var(--teal);padding-left:.85rem}
+details{max-width:42rem;margin:.3rem 0 .9rem}
+summary{cursor:pointer;color:var(--teal);font-weight:500;width:max-content;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"+";display:inline-block;width:1.1em;transition:transform .2s}
+details[open] summary::before{content:"\2212"}
+details ul{margin:.7rem 0 0;padding-left:1.15rem}
+details li{margin:.35rem 0}
+details[open] ul{animation:open .25s ease-out}
+@keyframes open{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.built{font-size:.9rem;color:var(--quiet);margin:0}
+.built a{margin-left:.6rem}
+
+.pubs{list-style:none;margin:0;padding:0;max-width:48rem}
+.pubs li{display:grid;grid-template-columns:3.5rem 1fr;gap:1rem;padding:.9rem 0;border-bottom:1px solid var(--hair)}
+.pubs .yr{color:var(--quiet);font-variant-numeric:tabular-nums}
+.pubs .t{font-weight:700;display:block}
+.pubs .v{color:var(--quiet)}
+
+.jobs{display:grid;gap:1.8rem;max-width:52rem}
+.job{display:grid;grid-template-columns:13rem minmax(0,1fr);gap:.5rem 3rem}
+.job .when{color:var(--quiet);font-size:.92rem}
+.job h3{font-size:1.1rem;margin:0}
+.job .role{margin:0 0 .4rem;color:var(--quiet)}
 .job p{margin:0}
-.note{color:var(--muted);font-size:.9rem;font-style:italic}
-table{width:100%;border-collapse:collapse;font-size:.95rem}
-th,td{text-align:left;vertical-align:top;padding:.65rem .5rem;border-bottom:1px solid var(--line)}
-th{font-weight:600;color:var(--muted);font-size:.85rem;text-transform:uppercase;letter-spacing:.04em}
-.edu p{margin:0 0 .9rem}
-footer{border-top:1px solid var(--line);padding:2rem 0 3rem;color:var(--muted);font-size:.88rem}
-@media (max-width:560px){
-  body{font-size:16px}
-  header.site{position:static}
-  article.project{padding:1.1rem 1.1rem}
-  .hero{padding-top:2.5rem}
-  thead{position:absolute;left:-9999px}
-  table,tbody,tr,td{display:block;width:100%}
-  tr{border-bottom:1px solid var(--line);padding:.6rem 0}
-  td{border:0;padding:.15rem 0}
+.aside{color:var(--quiet);font-style:italic;margin:2rem 0 0;font-size:.92rem}
+
+.other{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem}
+.other div{border-top:3px solid var(--ink);padding-top:.9rem}
+.other h3{font-size:1.1rem;margin:0 0 .4rem}
+.other p{margin:0 0 .5rem}
+
+.edu{display:grid;gap:1rem;max-width:52rem}
+.edu div{display:grid;grid-template-columns:13rem minmax(0,1fr);gap:.3rem 3rem}
+.edu .when{color:var(--quiet)}
+.edu p{margin:0}
+
+footer{border-top:1px solid var(--hair);padding:2.5rem 0 3.5rem;color:var(--quiet)}
+footer p{margin:0}
+
+
+/* project figures: user-driven, no autoplay */
+.fig{margin:1.2rem 0 1.3rem;max-width:42rem;background:var(--panel);border:1px solid var(--hair);border-radius:12px;padding:1.2rem 1.25rem 1rem}
+.fig h4{margin:0 0 .9rem;font-size:.95rem;font-weight:700}
+.fig figcaption{margin:.9rem 0 0;font-size:.82rem;color:var(--quiet)}
+.ctl{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.9rem}
+.ctl button{font:500 .88rem var(--sans);border:1.5px solid var(--ink);background:none;color:var(--ink);border-radius:6px;padding:.38rem .8rem;cursor:pointer}
+.ctl button:hover:not(:disabled){background:var(--ink);color:var(--ground)}
+.ctl button:disabled{opacity:.4;cursor:default}
+.ctl button.main{background:var(--teal);border-color:var(--teal);color:var(--ground)}
+.readout{display:grid;grid-template-columns:7rem 1fr;gap:.35rem .75rem;font-size:.93rem}
+.readout dt{color:var(--quiet)}
+.readout dd{margin:0;font-family:var(--mono)}
+.readout dd.say{color:var(--teal);font-weight:500}
+
+/* CrossAssist */
+.ca{display:grid;grid-template-columns:auto 1fr;gap:1.3rem;align-items:center}
+.sig{width:6.2rem;background:#1b1f24;border-radius:10px;padding:.55rem;display:grid;gap:.45rem}
+.sig .lamp{height:4.2rem;border-radius:6px;background:#2a2f36;display:grid;place-items:center;transition:background .25s}
+.sig svg{width:2.6rem;height:2.6rem}
+.sig .num{font:700 2rem/1 var(--mono);color:#3a4048;letter-spacing:.04em;transition:color .25s,filter .25s}
+.sig .num.on{color:#f5a623}
+.sig .num.blur{filter:blur(2.5px)}
+.frames{display:flex;gap:.35rem;margin-bottom:.7rem}
+.frames span{width:1.6rem;height:.35rem;border-radius:2px;background:var(--hair)}
+.frames span.on{background:var(--teal)}
+
+/* Plan First */
+.pf-req{font-family:var(--mono);font-size:.95rem;background:var(--ground);border-radius:6px;padding:.45rem .7rem;margin:0 0 .9rem}
+.pf{display:grid;grid-template-columns:1fr 1fr 9rem;gap:1rem;align-items:start}
+.pf fieldset{border:0;margin:0;padding:0;min-width:0}
+.pf legend{font-weight:700;font-size:.9rem;margin-bottom:.4rem;padding:0}
+.pf ul{list-style:none;margin:0;padding:0;font-size:.92rem}
+.pf li{margin:.3rem 0}
+.pf label{display:flex;gap:.45rem;align-items:baseline;cursor:pointer}
+.pf input{accent-color:var(--teal)}
+.stage{height:6.5rem;border-radius:8px;background:#dfe9f2;position:relative;overflow:hidden;transition:background .5s}
+.stage i{position:absolute;width:1.3rem;height:1.3rem;border-radius:50%;background:#4f8fd1;transition:background .5s}
+.stage i:nth-child(1){left:12%;top:30%}.stage i:nth-child(2){left:45%;top:55%}.stage i:nth-child(3){left:72%;top:22%}
+.stage.dramatic{background:#1a1f2b}
+.stage.dramatic i{animation:drift 1.1s ease-in-out infinite alternate}
+.stage.dramatic i:nth-child(2){animation-delay:-.4s}.stage.dramatic i:nth-child(3){animation-delay:-.8s}
+.stage.hue i{background:#e2513a}
+@keyframes drift{to{transform:translate(.9rem,-.7rem)}}
+.status{list-style:none;margin:.9rem 0 0;padding:0;font-size:.92rem;display:grid;gap:.3rem}
+.status b{font-family:var(--mono);font-weight:500;padding:0 .3em;border-radius:3px}
+.status .kept{background:var(--teal-wash);color:var(--teal)}
+.status .changed{background:#fbe3dd;color:#9b2c17}
+.status .unchecked{background:var(--ground);color:var(--quiet)}
+
+/* Car recommender */
+.car-q{display:flex;flex-wrap:wrap;gap:.4rem;margin:0 0 .9rem;padding:0;list-style:none}
+.car-q li{font-size:.86rem;border:1.5px solid var(--hair);border-radius:999px;padding:.12rem .65rem}
+.car-r{border-left:3px solid var(--teal);padding-left:.9rem}
+.car-r p{margin:0 0 .5rem;font-weight:700}
+.car-r ul{list-style:none;margin:0;padding:0;display:grid;gap:.35rem;font-size:.92rem}
+.car-r li{display:grid;grid-template-columns:1.3rem 1fr;gap:.2rem}
+.car-r .src{color:var(--quiet)}
+.car-r .gap{color:var(--quiet)}
+
+@media (max-width:640px){
+  .pf{grid-template-columns:1fr 1fr}.pf .stage{grid-column:1/-1}
+  .ca{grid-template-columns:1fr}.readout{grid-template-columns:6rem 1fr}
 }
-@media print{header.site,.skip,.links{display:none}section{break-inside:avoid}}
+@media (prefers-reduced-motion:reduce){.stage.dramatic i{animation:none}.sig .lamp,.sig .num,.stage,.stage i{transition:none}}
+
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr;gap:2.5rem;padding-top:1.5rem}
+  .work,.job,.edu div{grid-template-columns:1fr;gap:.4rem}
+  .other{grid-template-columns:1fr}
+}
+@media (max-width:420px){
+  .line{grid-template-columns:1fr;gap:.2rem}
+  .bar button{width:2.6rem;height:2.6rem}
+  .ring{width:2.6rem;height:2.6rem}
+}
+@media (prefers-reduced-motion:reduce){
+  .ring{transition:none}.caret{animation:none}details[open] ul{animation:none}
+}
+@media print{.demo,.top ul,.skip{display:none}.hero{grid-template-columns:1fr}}
+
+/* neumorphic layer: soft extruded surfaces; controls keep a 3:1 edge and visible labels */
+body{transition:background-color .3s,color .3s}
+.demo,.fig{border:0;box-shadow:var(--raise);border-radius:18px}
+.bar{box-shadow:var(--press);border-radius:14px}
+.bar button{box-shadow:var(--raise-sm);border-radius:10px;transition:box-shadow .2s}
+.bar button:hover{box-shadow:var(--press)}
+.pf-req{background:var(--ground);box-shadow:var(--press);border-radius:10px}
+.stage{box-shadow:var(--press)}
+.actions a,.ctl button,.toggle,.theme{background:var(--ground);color:var(--ink);border:1.5px solid var(--edge);border-radius:12px;box-shadow:var(--raise-sm);transition:box-shadow .2s,transform .1s}
+.actions a:hover,.ctl button:hover:not(:disabled),.toggle:hover,.theme:hover{background:var(--ground);color:var(--ink);box-shadow:var(--raise);filter:none}
+.actions a:active,.ctl button:active:not(:disabled),.toggle:active,.theme:active,.toggle[aria-pressed="true"]{box-shadow:var(--press)}
+.actions a.main,.ctl button.main{background:var(--teal);border-color:var(--teal);color:var(--on-teal)}
+.actions a.main:hover,.ctl button.main:hover:not(:disabled){background:var(--teal);color:var(--on-teal)}
+.ctl button:disabled{box-shadow:none;opacity:.45}
+.toggle{color:var(--ink)}
+.status .changed{background:var(--bad-bg);color:var(--bad)}
+.status b,.line.after q .cat{border-radius:6px}
+.other div{border-top:0;box-shadow:var(--raise);border-radius:16px;padding:1.2rem 1.3rem}
+.car-q li{border-color:var(--edge);box-shadow:var(--raise-sm)}
+.theme{display:inline-flex;align-items:center;gap:.45rem;font:500 .9rem var(--sans);padding:.4rem .8rem;cursor:pointer}
+.theme svg{width:1.05rem;height:1.05rem}
+.top{align-items:center}
+.top nav{display:flex;align-items:center;gap:1.4rem;flex-wrap:wrap}
+@media (prefers-reduced-motion:reduce){body,.bar button,.actions a,.ctl button,.toggle,.theme{transition:none}}
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to main content</a>
 
-<header class="site">
-  <div class="wrap">
-    <a class="brand" href="#top">Shubham Jakhete</a>
+<div class="wrap">
+  <header class="top">
+    <a class="name" href="#main">Shubham Jakhete</a>
     <nav aria-label="Sections">
       <ul>
         <li><a href="#research">Research</a></li>
         <li><a href="#manuscripts">Manuscripts</a></li>
         <li><a href="#experience">Experience</a></li>
-        <li><a href="#projects">Projects</a></li>
         <li><a href="cv.pdf">CV</a></li>
       </ul>
+      <button type="button" class="theme" id="theme" aria-pressed="false">
+        <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"></svg>
+        <span id="theme-label">Dark mode</span>
+      </button>
     </nav>
-  </div>
-</header>
+  </header>
+</div>
 
 <main id="main">
   <div class="wrap">
+    <div class="hero">
+      <div>
+        <h1>Shubham Jakhete</h1>
+        <p class="thesis">I study AI systems that interpret and act on digital interfaces for blind and low-vision people, and how they can catch interpretations that look valid but are wrong.</p>
+        <p class="status">I want to learn which errors a user needs to hear about, and how to confirm important actions without interrupting every step. MS in Computer Science from Cal State Fullerton, applying to PhD programs for Fall 2027.</p>
+        <ul class="actions">
+          <li><a class="main" href="cv.pdf">Read my CV</a></li>
+          <li><a href="mailto:shubhamsjakhete@gmail.com">Email me</a></li>
+          <li><a href="https://github.com/shubhamjakhete">GitHub</a></li>
+          <li><a href="https://linkedin.com/in/shubham-jakhete">LinkedIn</a></li>
+        </ul>
+      </div>
 
-    <div class="hero" id="top">
-      <h1>Shubham Jakhete</h1>
-      <p class="role">MS Computer Science, California State University, Fullerton · Applying to PhD programs for Fall 2027</p>
-      <p class="lede">I work on Human-Centered AI and accessibility, focusing on AI systems that interpret and act on digital interfaces for blind and low-vision people. I want to study how these systems can detect interpretations that look valid but are wrong, decide which errors a user needs to hear about, and confirm important actions without interrupting every step.</p>
-      <ul class="links">
-        <li><a class="btn primary" href="cv.pdf">CV (PDF)</a></li>
-        <li><a class="btn" href="mailto:shubhamsjakhete@gmail.com">Email</a></li>
-        <li><a class="btn" href="https://github.com/shubhamjakhete">GitHub</a></li>
-        <li><a class="btn" href="https://linkedin.com/in/shubham-jakhete">LinkedIn</a></li>
-      </ul>
-      <ul class="interests" aria-label="Research interests">
-        <li>Human-Computer Interaction</li>
-        <li>Accessibility</li>
-        <li>Assistive technology</li>
-        <li>Human-Centered AI</li>
-        <li>Neurosymbolic AI</li>
-        <li>Knowledge representation</li>
-      </ul>
+      <div class="demo" role="region" aria-labelledby="demo-title">
+        <div class="demo-head">
+          <h2 id="demo-title">What a screen reader says about icon buttons</h2>
+          <button class="toggle" id="toggle" type="button" aria-pressed="false">Pause</button>
+        </div>
+        <div class="bar" id="bar">
+          <span class="ring" id="ring" aria-hidden="true"></span>
+          <button type="button" data-i="0" aria-label="Example 1: settings icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+          </button>
+          <button type="button" data-i="1" aria-label="Example 2: bell icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+          </button>
+          <button type="button" data-i="2" aria-label="Example 3: trash icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/></svg>
+          </button>
+          <button type="button" data-i="3" aria-label="Example 4: share icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
+          </button>
+        </div>
+        <div class="speech" aria-live="off" id="speech">
+          <div class="line before"><span class="who">Without labels</span><q id="raw">button</q></div>
+          <div class="line after"><span class="who">With ContextLabeler</span><q id="said"></q></div>
+          <p class="check" id="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span id="checktext">Category confirmed by the ontology before speaking</span></p>
+        </div>
+        <p class="demo-note">An illustration of the speech pattern, not a recording. The confirmed category comes first, and the model's guess is hedged. Select an icon to see its example.</p>
+      </div>
     </div>
+  </div>
 
-    <section id="research" aria-labelledby="research-h">
+  <section id="research" aria-labelledby="research-h">
+    <div class="wrap">
       <h2 id="research-h">Research</h2>
 
-      <article class="project">
-        <h3>ContextLabeler</h3>
-        <p class="meta">Independent research, 2026 · Mentored by Richard Ladner (University of Washington)</p>
-        <p>An NVDA screen reader add-on that labels unlabeled UI elements for blind users. An LLM (Claude Haiku) proposes each label, and SPARQL ASK queries check it against an RDF/Turtle ontology before NVDA speaks it. Speech gives the confirmed category first so users can judge how far to trust the label.</p>
-        <ul>
-          <li>90.9% category accuracy with zero ontology-invalid outputs, against an 83.6% failure rate with the ontology gate removed.</li>
-          <li>0.82 s median latency (1.48 s at p95). A fingerprinted label store kept labels 98.4% consistent across 550 calls.</li>
-          <li>Found a soundness and completeness trade-off in ontology gating through a VS Code tree-item failure case. App-specific ontologies extend the vocabulary from 17 to 22 categories with no code change.</li>
-        </ul>
-        <p class="repo"><a href="https://github.com/shubhamjakhete/nvda_reader">Code on GitHub<span class="sr"> for ContextLabeler</span></a></p>
-        <ul class="tags" aria-label="Technologies"><li>Python</li><li>NVDA</li><li>Claude API</li><li>RDF/Turtle</li><li>SPARQL</li><li>RDFLib</li></ul>
+      <article class="work">
+        <div class="side"><strong>2026</strong>Independent research<br>Mentored by Richard Ladner, University of Washington</div>
+        <div>
+          <h3>ContextLabeler</h3>
+          <p>An NVDA screen reader add-on that labels unlabeled UI elements for blind users. An LLM (Claude Haiku) proposes each label, and SPARQL ASK queries check it against an RDF/Turtle ontology before NVDA speaks it. Speech gives the confirmed category first so users can judge how far to trust the label.</p>
+          <p class="headline-result">90.9% category accuracy with zero ontology-invalid outputs. With the ontology gate removed, 83.6% of outputs failed.</p>
+          <details>
+            <summary>Method and results</summary>
+            <ul>
+              <li>0.82 s median latency, 1.48 s at p95.</li>
+              <li>A fingerprinted label store kept labels 98.4% consistent across 550 calls.</li>
+              <li>Found a soundness and completeness trade-off in ontology gating through a VS Code tree-item failure case.</li>
+              <li>App-specific ontologies extend the vocabulary from 17 to 22 categories with no code change.</li>
+            </ul>
+          </details>
+          <p class="built">Python, NVDA, Claude API, RDF/Turtle, SPARQL, RDFLib <a href="https://github.com/shubhamjakhete/nvda_reader">Code<span class="sr"> for ContextLabeler</span></a></p>
+        </div>
       </article>
 
-      <article class="project">
-        <h3>CrossAssist</h3>
-        <p class="meta">MS capstone (CPSC 597), CSUF, 2026 · Advised by Dr. Duy H. Ho</p>
-        <p>An on-device iOS navigation aid for low-vision pedestrians. It runs three YOLO models through Core ML, two of them custom-trained to classify pedestrian signals and find crosswalks. Vision OCR reads walk-signal countdowns, and the app speaks "cross" only after a number is confirmed. Depth Anything V2 estimates distance, with a pinhole camera model between depth frames.</p>
-        <ul>
-          <li>Pilot with three low-vision participants: all three read the walk-signal state correctly within 10 m.</li>
-          <li>One participant struggled with the countdown. The cause was small display text, not OCR error.</li>
-          <li>Swift 6 concurrency safe, with no third-party dependencies.</li>
-        </ul>
-        <p class="repo"><a href="https://github.com/shubhamjakhete/cross_assist">Code on GitHub<span class="sr"> for CrossAssist</span></a></p>
-        <ul class="tags" aria-label="Technologies"><li>Swift 6</li><li>SwiftUI</li><li>Core ML</li><li>YOLO</li><li>Vision</li><li>ARKit</li></ul>
+      <article class="work">
+        <div class="side"><strong>2026</strong>MS capstone (CPSC 597), CSUF<br>Advised by Dr. Duy H. Ho</div>
+        <div>
+          <h3>CrossAssist</h3>
+          <p>An on-device iOS navigation aid for low-vision pedestrians. It runs three YOLO models through Core ML, two of them custom-trained to classify pedestrian signals and find crosswalks. Vision OCR reads walk-signal countdowns, and the app speaks "cross" only after a number is confirmed.</p>
+          <p class="headline-result">In a pilot with three low-vision participants, all three read the walk-signal state correctly within 10 m.</p>
+          <figure class="fig" aria-labelledby="ca-h">
+            <h4 id="ca-h">When does the app say "cross"?</h4>
+            <div class="ca">
+              <div class="sig" aria-hidden="true">
+                <div class="lamp" id="ca-lamp"><svg id="ca-icon" viewBox="0 0 24 24"></svg></div>
+                <div class="lamp"><span class="num" id="ca-num">88</span></div>
+              </div>
+              <div>
+                <div class="frames" aria-hidden="true"><span></span><span></span><span></span></div>
+                <dl class="readout" aria-live="polite">
+                  <dt>Camera frame</dt><dd id="ca-frame"></dd>
+                  <dt>OCR reads</dt><dd id="ca-ocr"></dd>
+                  <dt>App says</dt><dd class="say" id="ca-say"></dd>
+                </dl>
+              </div>
+            </div>
+            <div class="ctl">
+              <button type="button" id="ca-prev">Previous frame</button>
+              <button type="button" class="main" id="ca-next">Next frame</button>
+            </div>
+            <figcaption>An illustration of the decision rule, not app output. A walk symbol alone is not enough; the app waits until the countdown number is confirmed.</figcaption>
+          </figure>
+
+          <details>
+            <summary>Method and results</summary>
+            <ul>
+              <li>Depth Anything V2 estimates distance, with a pinhole camera model between depth frames.</li>
+              <li>One participant struggled with the countdown. The cause was small display text, not OCR error.</li>
+              <li>Swift 6 concurrency safe, with no third-party dependencies.</li>
+            </ul>
+          </details>
+          <p class="built">Swift 6, SwiftUI, Core ML, YOLO, Vision, ARKit <a href="https://github.com/shubhamjakhete/cross_assist">Code<span class="sr"> for CrossAssist</span></a></p>
+        </div>
       </article>
 
-      <article class="project">
-        <h3>Plan First</h3>
-        <p class="meta">Independent prototype, 2026 · Builds on Spellburst (Angert et al., UIST 2023)</p>
-        <p>A human-in-the-loop checkpoint for AI creative coding. Before any generated p5.js code runs, the artist sees the model's reading of an ambiguous request such as "make it more dramatic" as editable Change and Preserve lists, and nothing changes until they approve it. After each change, the system compares motion and dominant hue without another model call and marks each preserved item as kept, changed anyway, or not checked.</p>
-        <ul>
-          <li>In 60 automated test cases with no human participants, naming a property in Preserve cut unwanted changes from 25/60 to 6/60.</li>
-          <li>The effect was strongest for color and "make it calmer" requests, and weak when a request asked to change and keep motion at once.</li>
-        </ul>
-        <p class="repo"><a href="https://github.com/shubhamjakhete/spellburst-prototype">Code on GitHub<span class="sr"> for Plan First</span></a></p>
-        <ul class="tags" aria-label="Technologies"><li>TypeScript</li><li>p5.js</li><li>LLM evaluation</li></ul>
+      <article class="work">
+        <div class="side"><strong>2026</strong>Independent prototype<br>Builds on Spellburst (Angert et al., UIST 2023)</div>
+        <div>
+          <h3>Plan First</h3>
+          <p>A human-in-the-loop checkpoint for AI creative coding. Before any generated p5.js code runs, the artist sees the model's reading of an ambiguous request such as "make it more dramatic" as editable Change and Preserve lists, and nothing changes until they approve it.</p>
+          <p class="headline-result">In 60 automated test cases with no human participants, naming a property in Preserve cut unwanted changes from 25 to 6.</p>
+          <figure class="fig" aria-labelledby="pf-h">
+            <h4 id="pf-h">Approve the plan before any code runs</h4>
+            <p class="pf-req">"make it more dramatic"</p>
+            <div class="pf">
+              <fieldset><legend>Change</legend>
+                <ul><li>Darker background</li><li>Faster motion</li></ul>
+              </fieldset>
+              <fieldset><legend>Preserve</legend>
+                <ul>
+                  <li><label><input type="checkbox" id="pf-hue" checked> Color palette</label></li>
+                  <li><label><input type="checkbox" id="pf-shape" checked> Circle shapes</label></li>
+                </ul>
+              </fieldset>
+              <div class="stage" id="pf-stage" role="img" aria-label="Sketch preview: three blue circles on a light background"><i></i><i></i><i></i></div>
+            </div>
+            <ul class="status" id="pf-status" aria-live="polite"></ul>
+            <div class="ctl">
+              <button type="button" class="main" id="pf-go">Approve plan</button>
+              <button type="button" id="pf-reset" disabled>Reset</button>
+            </div>
+            <figcaption>An illustration, not the prototype itself. Untick Color palette to see the effect the tests measured: when a property is not named in Preserve, the model often changes it. Shapes are marked "not checked" because the system only reports properties it can measure, which are motion and dominant hue.</figcaption>
+          </figure>
+
+          <details>
+            <summary>Method and results</summary>
+            <ul>
+              <li>After each change, the system compares motion and dominant hue without another model call, then marks each preserved item as kept, changed anyway, or not checked.</li>
+              <li>The effect was strongest for color and "make it calmer" requests, and weak when a request asked to change and keep motion at once.</li>
+            </ul>
+          </details>
+          <p class="built">TypeScript, p5.js, LLM evaluation <a href="https://github.com/shubhamjakhete/spellburst-prototype">Code<span class="sr"> for Plan First</span></a></p>
+        </div>
       </article>
 
-      <article class="project">
-        <h3>Explainable Used Car Recommendation System</h3>
-        <p class="meta">Course project (CPSC 583, Knowledge Representation and Reasoning), team of three, 2025</p>
-        <p>An explainable recommender over 5,181 vehicles merged from Kaggle listings, NHTSA crash ratings, and NHTSA complaint data. It combines Prolog expert rules, an RDF/OWL knowledge graph queried with SPARQL, propositional filtering, and a probabilistic reliability estimate, so each result names the rule categories it meets. Data limits are stated openly: about 36% of vehicles had safety ratings and 22% had complaint records.</p>
-        <p class="repo"><a href="https://github.com/shubhamjakhete/esdt_project">Code on GitHub<span class="sr"> for the used car recommender</span></a></p>
-        <ul class="tags" aria-label="Technologies"><li>Prolog</li><li>RDF/OWL</li><li>SPARQL</li><li>FastAPI</li></ul>
-      </article>
-    </section>
+      <article class="work">
+        <div class="side"><strong>2025</strong>Course project (CPSC 583, Knowledge Representation and Reasoning), team of three</div>
+        <div>
+          <h3>Explainable Used Car Recommendation System</h3>
+          <p>An explainable recommender over 5,181 vehicles merged from Kaggle listings, NHTSA crash ratings, and NHTSA complaint data. Prolog expert rules, an RDF/OWL knowledge graph queried with SPARQL, propositional filtering, and a probabilistic reliability estimate combine so each result names the rule categories it meets.</p>
+          <p>Data limits are stated openly: about 36% of vehicles had safety ratings and 22% had complaint records.</p>
+          <figure class="fig" aria-labelledby="car-h">
+            <h4 id="car-h">Every result says why it was chosen</h4>
+            <ul class="car-q" aria-label="Example request"><li>Family car</li><li>Under $20,000</li><li>Strong safety</li></ul>
+            <div class="car-r">
+              <p>Example match: a midsize sedan</p>
+              <ul>
+                <li><span aria-hidden="true">&#10003;</span><span>Within budget <span class="src">(Prolog expert rule)</span></span></li>
+                <li><span aria-hidden="true">&#10003;</span><span>Seats five, family body type <span class="src">(RDF/OWL graph, queried with SPARQL)</span></span></li>
+                <li><span aria-hidden="true">&#10003;</span><span>5-star NHTSA crash rating <span class="src">(safety data)</span></span></li>
+                <li><span aria-hidden="true">&#10003;</span><span>Reliability estimate above threshold <span class="src">(probabilistic model)</span></span></li>
+              </ul>
+            </div>
+            <figcaption>An illustrative result, not real output. Each recommendation names the rule categories it meets, so the user can see the reasoning.</figcaption>
+          </figure>
 
-    <section id="manuscripts" aria-labelledby="manuscripts-h">
+          <p class="built">Prolog, RDF/OWL, SPARQL, FastAPI <a href="https://github.com/shubhamjakhete/esdt_project">Code<span class="sr"> for the used car recommender</span></a></p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="manuscripts" aria-labelledby="manuscripts-h">
+    <div class="wrap">
       <h2 id="manuscripts-h">Manuscripts</h2>
-      <ol class="pubs">
-        <li><span class="title">ContextLabeler: Ontology-Constrained AI Labeling for Blind Users in NVDA.</span> Shubham Jakhete. Demo paper, 2026.</li>
-        <li><span class="title">An AT-Native Voice Agent for Independent Computer Use by Blind Users.</span> Shubham Jakhete. Research proposal, 2026.</li>
-        <li><span class="title">CrossAssist: The Digital Shield for Independent Low-Vision Mobility.</span> Shubham Jakhete. MS project report (CPSC 597), California State University, Fullerton, 2026. Supervisor: Dr. Duy H. Ho.</li>
-      </ol>
-    </section>
+      <ul class="pubs">
+        <li><span class="yr">2026</span><span><span class="t">ContextLabeler: Ontology-Constrained AI Labeling for Blind Users in NVDA</span><span class="v">Shubham Jakhete. Demo paper.</span></span></li>
+        <li><span class="yr">2026</span><span><span class="t">An AT-Native Voice Agent for Independent Computer Use by Blind Users</span><span class="v">Shubham Jakhete. Research proposal.</span></span></li>
+        <li><span class="yr">2026</span><span><span class="t">CrossAssist: The Digital Shield for Independent Low-Vision Mobility</span><span class="v">Shubham Jakhete. MS project report (CPSC 597), California State University, Fullerton. Supervisor: Dr. Duy H. Ho.</span></span></li>
+      </ul>
+    </div>
+  </section>
 
-    <section id="experience" aria-labelledby="experience-h">
+  <section id="experience" aria-labelledby="experience-h">
+    <div class="wrap">
       <h2 id="experience-h">Industry experience</h2>
-      <div class="job">
-        <h3>One Community Inc.</h3>
-        <p class="meta">Volunteer Software Engineer · Sep 2026 to present</p>
-        <p>Contributing to the Highest Good Network (React, Node.js, MongoDB), the app the organization uses for time tracking and weekly reporting. Reviewed and documented 25+ pull requests in a codebase shared by 95 dev teams, and fixed bugs in its Mastodon post scheduler.</p>
+      <div class="jobs">
+        <div class="job">
+          <div class="when">Sep 2026 to present</div>
+          <div>
+            <h3>One Community Inc.</h3>
+            <p class="role">Volunteer Software Engineer</p>
+            <p>Contributing to the Highest Good Network (React, Node.js, MongoDB), the app the organization uses for time tracking and weekly reporting. Reviewed and documented 25+ pull requests in a codebase shared by 95 dev teams, and fixed bugs in its Mastodon post scheduler.</p>
+          </div>
+        </div>
+        <div class="job">
+          <div class="when">Aug 2025 to Dec 2025</div>
+          <div>
+            <h3>Beaver Ecoworks</h3>
+            <p class="role">Software Development Engineer Intern</p>
+            <p>Replaced an ingestion path that dropped data with a Python OPC UA client that polls 14 PLC tags every minute and writes straight to Supabase. Built a SCADA monitoring dashboard for an industrial effluent treatment skid as a static Next.js export backed by locked-down PostgreSQL functions.</p>
+          </div>
+        </div>
+        <div class="job">
+          <div class="when">Jun 2023 to Jul 2024, maintained since</div>
+          <div>
+            <h3>Beaver Ecoworks</h3>
+            <p class="role">Full Stack Engineer</p>
+            <p>Built a monitoring dashboard for a wastewater treatment plant covering 17 sensor channels, with PHP REST APIs and SQL rollups over MySQL, and moved deploys from manual FTP to GitHub Actions.</p>
+          </div>
+        </div>
       </div>
-      <div class="job">
-        <h3>Beaver Ecoworks</h3>
-        <p class="meta">Software Development Engineer Intern · Aug 2025 to Dec 2025</p>
-        <p>Replaced an ingestion path that dropped data with a Python OPC UA client that polls 14 PLC tags every minute and writes straight to Supabase. Built a SCADA monitoring dashboard for an industrial effluent treatment skid as a static Next.js export backed by locked-down PostgreSQL functions.</p>
-      </div>
-      <div class="job">
-        <h3>Beaver Ecoworks</h3>
-        <p class="meta">Full Stack Engineer · Jun 2023 to Jul 2024, maintained since</p>
-        <p>Built a monitoring dashboard for a wastewater treatment plant covering 17 sensor channels, with PHP REST APIs and SQL rollups over MySQL, and moved deploys from manual FTP to GitHub Actions.</p>
-      </div>
-      <p class="note">Production code for these roles is not public.</p>
-    </section>
+      <p class="aside">Production code for these roles is not public.</p>
 
-    <section id="projects" aria-labelledby="projects-h">
-      <h2 id="projects-h">Other projects</h2>
-      <table>
-        <thead><tr><th scope="col">Project</th><th scope="col">Description</th><th scope="col">Stack</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><a href="https://github.com/shubhamjakhete/SmartSky-Flight">SmartSky</a></td>
-            <td>Flight booking platform with a prototype LLM layer that turns natural-language travel queries into structured search parameters.</td>
-            <td>React, Node.js, MongoDB</td>
-          </tr>
-          <tr>
-            <td><a href="https://github.com/shubhamjakhete/Blockchain_Disk_Space_Rental">Blockchain Disk Space Rental</a></td>
-            <td>dApp for listing and renting disk space. A Solidity factory contract deploys one rental contract per listing (team of four).</td>
-            <td>Solidity, Next.js, Web3.js, Truffle</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+      <h2 class="sec-title" style="margin-top:3.2rem;font-size:1.4rem">Other projects</h2>
+      <div class="other">
+        <div>
+          <h3><a href="https://github.com/shubhamjakhete/SmartSky-Flight">SmartSky</a></h3>
+          <p>Flight booking platform with a prototype LLM layer that turns natural-language travel queries into structured search parameters.</p>
+          <p class="built">React, Node.js, MongoDB</p>
+        </div>
+        <div>
+          <h3><a href="https://github.com/shubhamjakhete/Blockchain_Disk_Space_Rental">Blockchain Disk Space Rental</a></h3>
+          <p>dApp for listing and renting disk space. A Solidity factory contract deploys one rental contract per listing. Team of four.</p>
+          <p class="built">Solidity, Next.js, Web3.js, Truffle</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <section id="education" aria-labelledby="education-h" class="edu">
+  <section id="education" aria-labelledby="education-h">
+    <div class="wrap">
       <h2 id="education-h">Education</h2>
-      <p><strong>MS in Computer Science</strong>, California State University, Fullerton, May 2026. GPA 3.89.<br>Coursework: Advanced Neural Networks, Advanced Algorithms, Knowledge Representation and Reasoning.</p>
-      <p><strong>MSc in Computer Science</strong>, Savitribai Phule Pune University, May 2021.</p>
-      <p><strong>BSc in Computer Science</strong>, Savitribai Phule Pune University, Dec 2018.</p>
-    </section>
-
-  </div>
+      <div class="edu">
+        <div><span class="when">May 2026</span><p><strong>MS in Computer Science</strong>, California State University, Fullerton. GPA 3.89. Coursework in Advanced Neural Networks, Advanced Algorithms, and Knowledge Representation and Reasoning.</p></div>
+        <div><span class="when">May 2021</span><p><strong>MSc in Computer Science</strong>, Savitribai Phule Pune University</p></div>
+        <div><span class="when">Dec 2018</span><p><strong>BSc in Computer Science</strong>, Savitribai Phule Pune University</p></div>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer>
   <div class="wrap">
-    <p>Contact: <a href="mailto:shubhamsjakhete@gmail.com">shubhamsjakhete@gmail.com</a>. Last updated October 2026.</p>
+    <p>Reach me at <a href="mailto:shubhamsjakhete@gmail.com">shubhamsjakhete@gmail.com</a>. Updated October 2026.</p>
   </div>
 </footer>
-<style>.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}</style>
+
+<script>
+(function(){
+  var items=[
+    {cat:"Settings control.",guess:" Likely: open settings."},
+    {cat:"Notification control.",guess:" Likely: show notifications."},
+    {cat:"Destructive action.",guess:" Likely: delete item."},
+    {cat:"Sharing action.",guess:" Likely: share link."}
+  ];
+  var bar=document.getElementById("bar"),ring=document.getElementById("ring"),
+      said=document.getElementById("said"),check=document.getElementById("check"),
+      toggle=document.getElementById("toggle"),buttons=bar.querySelectorAll("button");
+  var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var cur=0,cycle=null,typing=null,paused=reduce;
+
+  var moveRing;
+  function render(i,instant){
+    cur=i;clearInterval(typing);moveRing(i);check.classList.remove("on");
+    var it=items[i],full=it.cat+it.guess,n=instant?full.length:0;
+    function paint(){
+      var c=Math.min(n,it.cat.length),g=Math.max(0,n-it.cat.length);
+      said.innerHTML='<span class="cat"></span><span class="g"></span>'+(n<full.length?'<span class="caret"></span>':'');
+      said.querySelector(".cat").textContent=it.cat.slice(0,c);
+      said.querySelector(".g").textContent=it.guess.slice(0,g);
+      if(n>=it.cat.length)check.classList.add("on");
+    }
+    paint();
+    if(!instant){typing=setInterval(function(){n++;paint();if(n>=full.length)clearInterval(typing);},38);}
+  }
+  function start(){stop();cycle=setInterval(function(){render((cur+1)%items.length,false);},3200);}
+  function stop(){clearInterval(cycle);cycle=null;}
+  function setPaused(p){
+    paused=p;toggle.textContent=p?"Play":"Pause";toggle.setAttribute("aria-pressed",p?"true":"false");
+    if(p)stop();else start();
+  }
+  ring.style.left=buttons[0].offsetLeft+"px";
+  moveRing=function(i){var b=buttons[i];ring.style.width=b.offsetWidth+"px";ring.style.height=b.offsetHeight+"px";ring.style.transform="translateX("+(b.offsetLeft-buttons[0].offsetLeft)+"px)";};
+  buttons.forEach(function(b){
+    function pick(){setPaused(true);render(+b.dataset.i,reduce);}
+    b.addEventListener("click",pick);b.addEventListener("focus",pick);
+  });
+  toggle.addEventListener("click",function(){setPaused(!paused);});
+  window.addEventListener("resize",function(){moveRing(cur);});
+  render(0,reduce);
+  if(reduce){toggle.textContent="Play";toggle.setAttribute("aria-pressed","true");}else start();
+})();
+</script>
+
+<script>
+(function(){
+  /* CrossAssist stepper */
+  var hand='<path fill="#e8542f" d="M9 3.5a1.2 1.2 0 0 1 2.4 0V10h.6V2.6a1.2 1.2 0 0 1 2.4 0V10h.6V3.8a1.2 1.2 0 0 1 2.4 0v8.7c0 4.2-2.7 8-6.9 8-3 0-4.7-1.6-6.1-4.1L2.6 12.6a1.2 1.2 0 0 1 2-1.3L7 14V5.3a1.2 1.2 0 0 1 2 0z"/>';
+  var walk='<g fill="#e9f2f7"><circle cx="13" cy="3.6" r="2"/><path d="M11.4 7h2.8l2.2 4.3 3 .9-.5 1.7-3.8-1.1-1.1-2.1-.9 4 2.9 2.9v4.9h-1.9v-4.1l-3-2.7-1 4.3-1.7 2.5-1.6-1.1 1.5-2.3 1.6-7.2-1.8.9v3.1H6.2V9.8z"/></g>';
+  var F=[
+    {icon:hand,num:"",blur:false,frame:"1 of 3",ocr:"no number",say:"Wait."},
+    {icon:walk,num:"12",blur:true,frame:"2 of 3",ocr:"1? (low confidence)",say:"Walk signal. Checking the countdown."},
+    {icon:walk,num:"12",blur:false,frame:"3 of 3",ocr:"12 (confirmed)",say:"Cross. 12 seconds."}
+  ];
+  var i=0,el=function(id){return document.getElementById(id)};
+  var bars=document.querySelectorAll(".frames span");
+  function show(){
+    var f=F[i];el("ca-icon").innerHTML=f.icon;
+    var n=el("ca-num");n.textContent=f.num||"88";n.classList.toggle("on",!!f.num);n.classList.toggle("blur",f.blur);
+    el("ca-frame").textContent=f.frame;el("ca-ocr").textContent=f.ocr;el("ca-say").textContent=f.say;
+    bars.forEach(function(b,k){b.classList.toggle("on",k<=i)});
+    el("ca-prev").disabled=i===0;el("ca-next").disabled=i===F.length-1;
+  }
+  el("ca-prev").onclick=function(){if(i>0){i--;show();}};
+  el("ca-next").onclick=function(){if(i<F.length-1){i++;show();}};
+  show();
+
+  /* Plan First checkpoint */
+  var stage=el("pf-stage"),st=el("pf-status"),go=el("pf-go"),rs=el("pf-reset"),hue=el("pf-hue"),shape=el("pf-shape");
+  function row(name,cls,txt){return '<li>'+name+': <b class="'+cls+'">'+txt+'</b></li>';}
+  go.onclick=function(){
+    var keepHue=hue.checked;
+    stage.classList.add("dramatic");stage.classList.toggle("hue",!keepHue);
+    stage.setAttribute("aria-label","Sketch preview after the change: dark background, circles moving faster, circles "+(keepHue?"still blue":"now red"));
+    var h=row("Darker background","kept","done")+row("Faster motion","kept","done");
+    h+=keepHue?row("Color palette","kept","kept"):row("Color palette","changed","changed, not protected");
+    h+=shape.checked?row("Circle shapes","unchecked","not checked"):"";
+    st.innerHTML=h;go.disabled=true;rs.disabled=false;hue.disabled=true;shape.disabled=true;rs.focus();
+  };
+  rs.onclick=function(){
+    stage.className="stage";stage.setAttribute("aria-label","Sketch preview: three blue circles on a light background");
+    st.innerHTML="";go.disabled=false;rs.disabled=true;hue.disabled=false;shape.disabled=false;go.focus();
+  };
+})();
+</script>
+
+<script>
+(function(){
+  var root=document.documentElement,btn=document.getElementById("theme"),
+      icon=document.getElementById("theme-icon"),label=document.getElementById("theme-label"),
+      mq=window.matchMedia("(prefers-color-scheme: dark)");
+  var moon='<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>';
+  var sun='<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>';
+  function current(){var t=root.getAttribute("data-theme");return t?t:(mq.matches?"dark":"light");}
+  function paint(){
+    var dark=current()==="dark";
+    btn.setAttribute("aria-pressed",dark?"true":"false");
+    label.textContent="Dark mode";icon.innerHTML=dark?moon:sun;
+  }
+  btn.addEventListener("click",function(){
+    var next=current()==="dark"?"light":"dark";root.setAttribute("data-theme",next);
+    try{localStorage.setItem("theme",next);}catch(e){}
+    paint();
+  });
+  mq.addEventListener&&mq.addEventListener("change",function(){if(!root.getAttribute("data-theme"))paint();});
+  paint();
+})();
+</script>
 </body>
 </html>
