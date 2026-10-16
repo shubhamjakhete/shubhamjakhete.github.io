@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shubham Jakhete</title>
+<meta name="description" content="Shubham Jakhete: Human-Centered AI and accessibility research on AI systems that interpret digital interfaces for blind and low-vision people.">
+<meta name="color-scheme" content="light dark">
+<style>
+:root{
+  --bg:#fbfaf7;--surface:#ffffff;--text:#1d1c1a;--muted:#5a5853;--line:#e3e0d8;
+  --accent:#1f5f8b;--accent-soft:#e6eff5;--tag:#f1efe9;
+  --serif:"Iowan Old Style","Charter","Palatino Linotype",Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#141413;--surface:#1c1c1a;--text:#ecebe6;--muted:#a9a69e;--line:#33322e;
+  --accent:#7cb8e0;--accent-soft:#1d2a33;--tag:#26251f;}
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--text);font:17px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:2px}
+.skip{position:absolute;left:-999px;top:0;background:var(--accent);color:var(--bg);padding:.6rem 1rem;z-index:10}
+.skip:focus{left:1rem;top:1rem}
+.wrap{max-width:46rem;margin:0 auto;padding:0 1.25rem}
+header.site{border-bottom:1px solid var(--line);position:sticky;top:0;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(6px);z-index:5}
+header.site .wrap{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding-top:.7rem;padding-bottom:.7rem;flex-wrap:wrap}
+.brand{font-family:var(--serif);font-weight:600;font-size:1.05rem;color:var(--text);text-decoration:none}
+nav ul{list-style:none;margin:0;padding:0;display:flex;gap:1.1rem;flex-wrap:wrap;font-size:.92rem}
+nav a{color:var(--muted);text-decoration:none}
+nav a:hover{color:var(--accent)}
+.hero{padding:4rem 0 2.5rem}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.25}
+h1{font-size:clamp(2.1rem,6vw,2.8rem);margin:0 0 .4rem;letter-spacing:-.01em}
+.role{color:var(--muted);margin:0 0 1.6rem;font-size:1.02rem}
+.lede{font-size:1.12rem;margin:0 0 1.6rem}
+.links{display:flex;flex-wrap:wrap;gap:.6rem;list-style:none;padding:0;margin:0}
+.btn{display:inline-block;padding:.45rem .95rem;border:1px solid var(--line);border-radius:999px;text-decoration:none;font-size:.93rem;color:var(--text);background:var(--surface)}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.btn.primary:hover{color:var(--bg);filter:brightness(1.08)}
+section{padding:2.2rem 0;border-top:1px solid var(--line)}
+h2{font-size:1.45rem;margin:0 0 1.4rem}
+.interests{display:flex;flex-wrap:wrap;gap:.45rem;list-style:none;padding:0;margin:1rem 0 0}
+.interests li{background:var(--accent-soft);color:var(--text);padding:.2rem .7rem;border-radius:999px;font-size:.88rem}
+article.project{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:1.4rem 1.5rem;margin:0 0 1.2rem}
+article.project h3{margin:0;font-size:1.22rem}
+.meta{color:var(--muted);font-size:.9rem;margin:.25rem 0 .9rem}
+article.project p{margin:0 0 .8rem}
+article.project ul{margin:0 0 .9rem;padding-left:1.2rem}
+article.project li{margin:.25rem 0}
+.tags{display:flex;flex-wrap:wrap;gap:.4rem;list-style:none;padding:0;margin:.4rem 0 0}
+.tags li{font:.78rem var(--mono);background:var(--tag);padding:.15rem .5rem;border-radius:4px;color:var(--muted)}
+.repo{font-size:.9rem}
+ol.pubs{padding-left:1.3rem;margin:0}
+ol.pubs li{margin:0 0 .9rem}
+.pubs .title{font-weight:600}
+.job{margin:0 0 1.5rem}
+.job h3{font-size:1.08rem;margin:0}
+.job .meta{margin:.15rem 0 .5rem}
+.job p{margin:0}
+.note{color:var(--muted);font-size:.9rem;font-style:italic}
+table{width:100%;border-collapse:collapse;font-size:.95rem}
+th,td{text-align:left;vertical-align:top;padding:.65rem .5rem;border-bottom:1px solid var(--line)}
+th{font-weight:600;color:var(--muted);font-size:.85rem;text-transform:uppercase;letter-spacing:.04em}
+.edu p{margin:0 0 .9rem}
+footer{border-top:1px solid var(--line);padding:2rem 0 3rem;color:var(--muted);font-size:.88rem}
+@media (max-width:560px){
+  body{font-size:16px}
+  header.site{position:static}
+  article.project{padding:1.1rem 1.1rem}
+  .hero{padding-top:2.5rem}
+  thead{position:absolute;left:-9999px}
+  table,tbody,tr,td{display:block;width:100%}
+  tr{border-bottom:1px solid var(--line);padding:.6rem 0}
+  td{border:0;padding:.15rem 0}
+}
+@media print{header.site,.skip,.links{display:none}section{break-inside:avoid}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="#top">Shubham Jakhete</a>
+    <nav aria-label="Sections">
+      <ul>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#manuscripts">Manuscripts</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="cv.pdf">CV</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+
+    <div class="hero" id="top">
+      <h1>Shubham Jakhete</h1>
+      <p class="role">MS Computer Science, California State University, Fullerton · Applying to PhD programs for Fall 2027</p>
+      <p class="lede">I work on Human-Centered AI and accessibility, focusing on AI systems that interpret and act on digital interfaces for blind and low-vision people. I want to study how these systems can detect interpretations that look valid but are wrong, decide which errors a user needs to hear about, and confirm important actions without interrupting every step.</p>
+      <ul class="links">
+        <li><a class="btn primary" href="cv.pdf">CV (PDF)</a></li>
+        <li><a class="btn" href="mailto:shubhamsjakhete@gmail.com">Email</a></li>
+        <li><a class="btn" href="https://github.com/shubhamjakhete">GitHub</a></li>
+        <li><a class="btn" href="https://linkedin.com/in/shubham-jakhete">LinkedIn</a></li>
+      </ul>
+      <ul class="interests" aria-label="Research interests">
+        <li>Human-Computer Interaction</li>
+        <li>Accessibility</li>
+        <li>Assistive technology</li>
+        <li>Human-Centered AI</li>
+        <li>Neurosymbolic AI</li>
+        <li>Knowledge representation</li>
+      </ul>
+    </div>
+
+    <section id="research" aria-labelledby="research-h">
+      <h2 id="research-h">Research</h2>
+
+      <article class="project">
+        <h3>ContextLabeler</h3>
+        <p class="meta">Independent research, 2026 · Mentored by Richard Ladner (University of Washington)</p>
+        <p>An NVDA screen reader add-on that labels unlabeled UI elements for blind users. An LLM (Claude Haiku) proposes each label, and SPARQL ASK queries check it against an RDF/Turtle ontology before NVDA speaks it. Speech gives the confirmed category first so users can judge how far to trust the label.</p>
+        <ul>
+          <li>90.9% category accuracy with zero ontology-invalid outputs, against an 83.6% failure rate with the ontology gate removed.</li>
+          <li>0.82 s median latency (1.48 s at p95). A fingerprinted label store kept labels 98.4% consistent across 550 calls.</li>
+          <li>Found a soundness and completeness trade-off in ontology gating through a VS Code tree-item failure case. App-specific ontologies extend the vocabulary from 17 to 22 categories with no code change.</li>
+        </ul>
+        <p class="repo"><a href="https://github.com/shubhamjakhete/nvda_reader">Code on GitHub<span class="sr"> for ContextLabeler</span></a></p>
+        <ul class="tags" aria-label="Technologies"><li>Python</li><li>NVDA</li><li>Claude API</li><li>RDF/Turtle</li><li>SPARQL</li><li>RDFLib</li></ul>
+      </article>
+
+      <article class="project">
+        <h3>CrossAssist</h3>
+        <p class="meta">MS capstone (CPSC 597), CSUF, 2026 · Advised by Dr. Duy H. Ho</p>
+        <p>An on-device iOS navigation aid for low-vision pedestrians. It runs three YOLO models through Core ML, two of them custom-trained to classify pedestrian signals and find crosswalks. Vision OCR reads walk-signal countdowns, and the app speaks "cross" only after a number is confirmed. Depth Anything V2 estimates distance, with a pinhole camera model between depth frames.</p>
+        <ul>
+          <li>Pilot with three low-vision participants: all three read the walk-signal state correctly within 10 m.</li>
+          <li>One participant struggled with the countdown. The cause was small display text, not OCR error.</li>
+          <li>Swift 6 concurrency safe, with no third-party dependencies.</li>
+        </ul>
+        <p class="repo"><a href="https://github.com/shubhamjakhete/cross_assist">Code on GitHub<span class="sr"> for CrossAssist</span></a></p>
+        <ul class="tags" aria-label="Technologies"><li>Swift 6</li><li>SwiftUI</li><li>Core ML</li><li>YOLO</li><li>Vision</li><li>ARKit</li></ul>
+      </article>
+
+      <article class="project">
+        <h3>Plan First</h3>
+        <p class="meta">Independent prototype, 2026 · Builds on Spellburst (Angert et al., UIST 2023)</p>
+        <p>A human-in-the-loop checkpoint for AI creative coding. Before any generated p5.js code runs, the artist sees the model's reading of an ambiguous request such as "make it more dramatic" as editable Change and Preserve lists, and nothing changes until they approve it. After each change, the system compares motion and dominant hue without another model call and marks each preserved item as kept, changed anyway, or not checked.</p>
+        <ul>
+          <li>In 60 automated test cases with no human participants, naming a property in Preserve cut unwanted changes from 25/60 to 6/60.</li>
+          <li>The effect was strongest for color and "make it calmer" requests, and weak when a request asked to change and keep motion at once.</li>
+        </ul>
+        <p class="repo"><a href="https://github.com/shubhamjakhete/spellburst-prototype">Code on GitHub<span class="sr"> for Plan First</span></a></p>
+        <ul class="tags" aria-label="Technologies"><li>TypeScript</li><li>p5.js</li><li>LLM evaluation</li></ul>
+      </article>
+
+      <article class="project">
+        <h3>Explainable Used Car Recommendation System</h3>
+        <p class="meta">Course project (CPSC 583, Knowledge Representation and Reasoning), team of three, 2025</p>
+        <p>An explainable recommender over 5,181 vehicles merged from Kaggle listings, NHTSA crash ratings, and NHTSA complaint data. It combines Prolog expert rules, an RDF/OWL knowledge graph queried with SPARQL, propositional filtering, and a probabilistic reliability estimate, so each result names the rule categories it meets. Data limits are stated openly: about 36% of vehicles had safety ratings and 22% had complaint records.</p>
+        <p class="repo"><a href="https://github.com/shubhamjakhete/esdt_project">Code on GitHub<span class="sr"> for the used car recommender</span></a></p>
+        <ul class="tags" aria-label="Technologies"><li>Prolog</li><li>RDF/OWL</li><li>SPARQL</li><li>FastAPI</li></ul>
+      </article>
+    </section>
+
+    <section id="manuscripts" aria-labelledby="manuscripts-h">
+      <h2 id="manuscripts-h">Manuscripts</h2>
+      <ol class="pubs">
+        <li><span class="title">ContextLabeler: Ontology-Constrained AI Labeling for Blind Users in NVDA.</span> Shubham Jakhete. Demo paper, 2026.</li>
+        <li><span class="title">An AT-Native Voice Agent for Independent Computer Use by Blind Users.</span> Shubham Jakhete. Research proposal, 2026.</li>
+        <li><span class="title">CrossAssist: The Digital Shield for Independent Low-Vision Mobility.</span> Shubham Jakhete. MS project report (CPSC 597), California State University, Fullerton, 2026. Supervisor: Dr. Duy H. Ho.</li>
+      </ol>
+    </section>
+
+    <section id="experience" aria-labelledby="experience-h">
+      <h2 id="experience-h">Industry experience</h2>
+      <div class="job">
+        <h3>One Community Inc.</h3>
+        <p class="meta">Volunteer Software Engineer · Sep 2026 to present</p>
+        <p>Contributing to the Highest Good Network (React, Node.js, MongoDB), the app the organization uses for time tracking and weekly reporting. Reviewed and documented 25+ pull requests in a codebase shared by 95 dev teams, and fixed bugs in its Mastodon post scheduler.</p>
+      </div>
+      <div class="job">
+        <h3>Beaver Ecoworks</h3>
+        <p class="meta">Software Development Engineer Intern · Aug 2025 to Dec 2025</p>
+        <p>Replaced an ingestion path that dropped data with a Python OPC UA client that polls 14 PLC tags every minute and writes straight to Supabase. Built a SCADA monitoring dashboard for an industrial effluent treatment skid as a static Next.js export backed by locked-down PostgreSQL functions.</p>
+      </div>
+      <div class="job">
+        <h3>Beaver Ecoworks</h3>
+        <p class="meta">Full Stack Engineer · Jun 2023 to Jul 2024, maintained since</p>
+        <p>Built a monitoring dashboard for a wastewater treatment plant covering 17 sensor channels, with PHP REST APIs and SQL rollups over MySQL, and moved deploys from manual FTP to GitHub Actions.</p>
+      </div>
+      <p class="note">Production code for these roles is not public.</p>
+    </section>
+
+    <section id="projects" aria-labelledby="projects-h">
+      <h2 id="projects-h">Other projects</h2>
+      <table>
+        <thead><tr><th scope="col">Project</th><th scope="col">Description</th><th scope="col">Stack</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><a href="https://github.com/shubhamjakhete/SmartSky-Flight">SmartSky</a></td>
+            <td>Flight booking platform with a prototype LLM layer that turns natural-language travel queries into structured search parameters.</td>
+            <td>React, Node.js, MongoDB</td>
+          </tr>
+          <tr>
+            <td><a href="https://github.com/shubhamjakhete/Blockchain_Disk_Space_Rental">Blockchain Disk Space Rental</a></td>
+            <td>dApp for listing and renting disk space. A Solidity factory contract deploys one rental contract per listing (team of four).</td>
+            <td>Solidity, Next.js, Web3.js, Truffle</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="education" aria-labelledby="education-h" class="edu">
+      <h2 id="education-h">Education</h2>
+      <p><strong>MS in Computer Science</strong>, California State University, Fullerton, May 2026. GPA 3.89.<br>Coursework: Advanced Neural Networks, Advanced Algorithms, Knowledge Representation and Reasoning.</p>
+      <p><strong>MSc in Computer Science</strong>, Savitribai Phule Pune University, May 2021.</p>
+      <p><strong>BSc in Computer Science</strong>, Savitribai Phule Pune University, Dec 2018.</p>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Contact: <a href="mailto:shubhamsjakhete@gmail.com">shubhamsjakhete@gmail.com</a>. Last updated October 2026.</p>
+  </div>
+</footer>
+<style>.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}</style>
+</body>
+</html>
